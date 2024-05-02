@@ -203,7 +203,7 @@ const TaskManagementPage = ({ projectId, projects }) => {
         </Select>
         <Select
           value={filterCriteria.status}
-          onChange={(e) => handleFilterChange("status", e.target.value)}
+          onChange={(value) => handleFilterChange("status",value)}
           style={{ width: 150 }}
           className="mr-2"
         >
