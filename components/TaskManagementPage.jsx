@@ -218,55 +218,68 @@ const TaskManagementPage = ({ projectId, projects }) => {
         </Button>
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>
-    <div className="flex p-4">
-        {["To Do", "In Progress", "Done"].map((status) => (
-            <Droppable key={status} droppableId={status}>
-                {(provided) => (
+  <div className="flex p-4">
+    {["To Do", "In Progress", "Done"].map((status) => (
+      <Droppable key={status} droppableId={status}>
+        {(provided, snapshot) => (
+          <div
+            className="flex-1 w-300 h-300 mx-6"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            style={{
+              background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
+              padding: 4,
+              width: 250,
+              minHeight: 500
+            }}
+          >
+            <h2 className="text-lg font-semibold mb-2">{status}</h2>
+            {filteredTasks
+              .filter((task) => task.status === status)
+              .map((task, index) => (
+                <Draggable
+                  key={task.id}
+                  draggableId={task.id.toString()}
+                  index={index}
+                >
+                  {(provided, snapshot) => (
                     <div
-                        className="flex-1 w-300 h-300 mx-6"
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
+                      className="bg-white p-4 rounded shadow-md mb-4 cursor-pointer"
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={{
+                        ...provided.draggableProps.style,
+                        minHeight: "50px",
+                        backgroundColor: snapshot.isDragging
+                          ? "#263B4A"
+                          : "#456C86",
+                        color: "white"
+                      }}
                     >
-                        <h2 className="text-lg font-semibold mb-2">{status}</h2>
-                        {filteredTasks.map((task, index) => {
-                            if (task.status !== status) return null;
-                            return (
-                                <Draggable
-                                    key={task.id}
-                                    draggableId={task.id.toString()}
-                                    index={index}
-                                >
-                                    {(provided) => (
-                                        <div
-                                            className="bg-white p-4 rounded shadow-md mb-4 cursor-pointer flex flex-col justify-between"
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            ref={provided.innerRef}
-                                            style={{
-                                                ...provided.draggableProps.style,
-                                                height: "100px", 
-                                            }}
-                                            // onClick={() => handleTaskClick(task.id)}
-                                        >
-                                            <h3 className="text-sm font-semibold">
-                                                {task.title}
-                                            </h3>
-                                            <div className="flex justify-between items-center">
-                                                <EyeOutlined onClick={() => handleViewTask(task.id)} className="mr-2" />
-                                                <EditOutlined onClick={() => handleEditTask(task.id)} />
-                                            </div>
-                                        </div>
-                                    )}
-                                </Draggable>
-                            );
-                        })}
-                        {provided.placeholder}
+                      <h3 className="text-sm font-semibold">{task.title}</h3>
+                      <div className="flex justify-between items-center">
+                        <EyeOutlined
+                          onClick={() => handleViewTask(task.id)}
+                          className="mr-2"
+                        />
+                        <EditOutlined
+                          onClick={() => handleEditTask(task.id)}
+                        />
+                      </div>
                     </div>
-                )}
-            </Droppable>
-        ))}
-    </div>
+                  )}
+                </Draggable>
+              ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    ))}
+  </div>
 </DragDropContext>
+
+
 
       {selectedTask && (
         <Modal
