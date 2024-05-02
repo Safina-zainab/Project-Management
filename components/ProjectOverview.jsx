@@ -59,9 +59,9 @@ const ProjectOverview = () => {
               <Link href={`/project/${project.id}`} key="view">
                 <Button type="link">View</Button>
               </Link>,
-              <Button key="edit" onClick={() => handleEdit(project)}>
-                Edit
-              </Button>,
+              // <Button key="edit" onClick={() => handleEdit(project)}>
+              //   Edit
+              // </Button>,
               <Button
                 key="delete"
                 type="danger"

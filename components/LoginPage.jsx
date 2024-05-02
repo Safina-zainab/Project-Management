@@ -16,7 +16,7 @@ const LoginPage = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-      <div style={{ maxWidth: '400px', width: '100%', padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}>
+      <div style={{ maxWidth: '400px', width: '100%', background:'#ffff',padding: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}>
         <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Login</h1>
         <Form
           name="loginForm"
