@@ -3,6 +3,9 @@
 ## Objective
 Develop a dashboard for a project management application that allows users to manage tasks and projects.
 
+## Login Credentials 
+**username:  admin**
+**password:  password**
 ## Features
 - **Authentication Page:**
   - Create a login form with validation using Ant Design for the form elements and validation feedback.
